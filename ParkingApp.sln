@@ -6,8 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingApp.Core", "ParkingApp.Core\ParkingApp.Core.csproj", "{3857A766-E20B-4591-83B1-3342EA5F546F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingApp.Infrastructure", "ParkingApp.Infrastructure\ParkingApp.Infrastructure.csproj", "{7647C5C6-6F30-48E1-9BF6-B368A2FEB598}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3857A766-E20B-4591-83B1-3342EA5F546F} = {3857A766-E20B-4591-83B1-3342EA5F546F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingApp.Api", "ParkingApp.Api\ParkingApp.Api.csproj", "{68F43D74-00A5-48D7-9CE5-272FE96FDB77}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3857A766-E20B-4591-83B1-3342EA5F546F} = {3857A766-E20B-4591-83B1-3342EA5F546F}
+		{7647C5C6-6F30-48E1-9BF6-B368A2FEB598} = {7647C5C6-6F30-48E1-9BF6-B368A2FEB598}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkingApp.Tests", "ParkingApp.Tests\ParkingApp.Tests.csproj", "{85427A80-D41E-4E4A-9F79-68718D7353CE}"
 EndProject
