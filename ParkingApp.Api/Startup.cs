@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ParkingApp.Infrastructure.Database;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ParkingApp.Api
 {
@@ -29,6 +30,10 @@ namespace ParkingApp.Api
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1",new Info{Title = "Parking app",Version = "v1"});
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -46,6 +51,12 @@ namespace ParkingApp.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json","Parking app");
+                x.RoutePrefix = string.Empty;
+            });
             app.UseMvc();
         }
     }
