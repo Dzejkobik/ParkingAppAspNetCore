@@ -13,5 +13,9 @@ namespace ParkingApp.Infrastructure.Database
         {
             
         }
+
+        public DbSet<ParkingLot> ParkingLots { get; set; }
+        public DbSet<ParkingSpot> ParkingSpots { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }

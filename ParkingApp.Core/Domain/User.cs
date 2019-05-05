@@ -7,5 +7,6 @@ namespace ParkingApp.Core.Domain
 {
     public class User : IdentityUser
     {
+        public ParkingSpot ParkingSpot { get; set; }
     }
 }
