@@ -11,5 +11,6 @@ namespace ParkingApp.Infrastructure.Services
     public interface IUserService
     {
         Task<ServiceResult> CreateUserAsync(UserDto userDto);
+        Task<ServiceResult<string>> SignInAsync(UserDto userDto);
     }
 }

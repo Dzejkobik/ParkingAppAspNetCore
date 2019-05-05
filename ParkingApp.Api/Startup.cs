@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using ParkingApp.Core.Domain;
 using ParkingApp.Infrastructure.Database;
 using ParkingApp.Infrastructure.Jwt;
+using ParkingApp.Infrastructure.Validators;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace ParkingApp.Api
@@ -52,6 +53,9 @@ namespace ParkingApp.Api
                 };
             });
             services.Configure<JwtSettings>(options => Configuration.GetSection("JwtSettings").Bind(options));
+
+            services.AddScoped<IUserDtoValidator, UserDtoValidator>();
+            services.AddScoped<ITokenGenerator, JwtGenerator>();
 
             services.AddSwaggerGen(x =>
             {
