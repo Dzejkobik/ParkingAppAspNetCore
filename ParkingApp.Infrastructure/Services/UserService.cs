@@ -35,7 +35,7 @@ namespace ParkingApp.Infrastructure.Services
             {
                 return serviceResult;
             }
-            var user = UserMapper.MapUserDtoToUser(userDto);
+            var user = Mapper.Map(userDto);
             var userManagerResult = await _userManager.CreateAsync(user,userDto.Password);
             if (userManagerResult.Succeeded == false)
             {

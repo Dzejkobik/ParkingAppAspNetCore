@@ -6,9 +6,9 @@ using ParkingApp.Infrastructure.DTO;
 
 namespace ParkingApp.Infrastructure.Mappers
 {
-    public static class UserMapper
+    public static class Mapper
     {
-        public static User MapUserDtoToUser(UserDto userDto)
+        public static User Map(UserDto userDto)
         {
             var user = new User();
             user.Email = userDto.Email;

@@ -11,5 +11,6 @@ namespace ParkingApp.Core.Domain
         public DateTime LeftParkingSpotAt { get; set; }
         public decimal CostOfTransaction { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
     }
 }
