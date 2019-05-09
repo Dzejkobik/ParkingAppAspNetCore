@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +40,10 @@ namespace ParkingApp.Api
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDefaultIdentity<User>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -58,6 +62,8 @@ namespace ParkingApp.Api
 
             services.AddScoped<IUserDtoValidator, UserDtoValidator>();
             services.AddScoped<ITokenGenerator, JwtGenerator>();
+            services.AddScoped<IdentityOptions>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IParkingLotRepository, ParkingLotRepository>();
             services.AddScoped<IParkingLotService, ParkingLotService>();
 

@@ -9,5 +9,6 @@ namespace ParkingApp.Core.Domain
     {
         public ParkingSpot ParkingSpot { get; set; }
         public Transaction Transaction { get; set; }
+        public string Role { get; set; }
     }
 }

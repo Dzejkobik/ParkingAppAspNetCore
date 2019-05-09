@@ -36,6 +36,8 @@ namespace ParkingApp.Infrastructure.Validators
                 return serviceResult;
             }
 
+            serviceResult.IsSuccessful = true;
+
             return serviceResult;
         }
     }

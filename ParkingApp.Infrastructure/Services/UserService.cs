@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +37,8 @@ namespace ParkingApp.Infrastructure.Services
                 return serviceResult;
             }
             var user = Mapper.Map(userDto);
+            string defaultRole = "Customer";
+            user.Role = defaultRole;
             var userManagerResult = await _userManager.CreateAsync(user,userDto.Password);
             if (userManagerResult.Succeeded == false)
             {
@@ -47,6 +50,8 @@ namespace ParkingApp.Infrastructure.Services
 
                 return serviceResult;
             }
+
+            await _userManager.AddToRoleAsync(user, user.Role);
             serviceResult.IsSuccessful = userManagerResult.Succeeded;
             return serviceResult;
         }
@@ -64,9 +69,11 @@ namespace ParkingApp.Infrastructure.Services
             }
             var signInResult = await _signInManager.PasswordSignInAsync(userDto.UserName,
                 userDto.Password, true, false);
+            var user = await _userManager.FindByNameAsync(userDto.UserName);
+            var role = await _userManager.GetRolesAsync(user);
             if (signInResult.Succeeded)
             {
-                var token = _tokenGenerator.GenerateToken(userDto.UserName);
+                var token = _tokenGenerator.GenerateToken(userDto.UserName,role.FirstOrDefault());
                 serviceResult.Object = token;
                 serviceResult.IsSuccessful = true;
                 return serviceResult;
