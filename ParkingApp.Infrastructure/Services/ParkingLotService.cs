@@ -23,7 +23,7 @@ namespace ParkingApp.Infrastructure.Services
             var listOfDtos = new List<ParkingLotDto>();
             foreach (var parkingLot in list)
             {
-                var parkingLotDto = ParkingLotMapper.Map(parkingLot);
+                var parkingLotDto = Mapper.Map(parkingLot);
                 listOfDtos.Add(parkingLotDto);
             }
 
