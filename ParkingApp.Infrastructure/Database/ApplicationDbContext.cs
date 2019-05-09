@@ -14,6 +14,21 @@ namespace ParkingApp.Infrastructure.Database
             
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<User>()
+                .HasOne(x => x.ParkingSpot)
+                .WithOne(x => x.User)
+                .HasForeignKey<ParkingSpot>(x => x.UserId);
+
+            builder.Entity<User>()
+                .HasOne(x => x.Transaction)
+                .WithOne(x => x.User)
+                .HasForeignKey<Transaction>(x => x.UserId);
+
+            base.OnModelCreating(builder);
+        }
+
         public DbSet<ParkingLot> ParkingLots { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
