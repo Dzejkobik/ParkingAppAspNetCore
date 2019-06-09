@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using ParkingApp.Infrastructure.Services;
@@ -23,6 +24,15 @@ namespace ParkingApp.Api.Controllers
         {
             var list = await _parkingLotService.GetAllParkingLotsAsync();
             return Ok(list);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> AddParkingLot()
+        {
+            return new ObjectResult(new
+            {
+                text = "xd"
+            });
         }
     }
 }

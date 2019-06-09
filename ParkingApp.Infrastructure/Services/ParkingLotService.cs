@@ -34,10 +34,5 @@ namespace ParkingApp.Infrastructure.Services
             result.Object = listOfDtos;
             return result;
         }
-
-        public async Task<ServiceResult> AddParkingLot(ParkingLotDtoGet parkingLotDto)
-        {
-
-        }
     }
 }
