@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using ParkingApp.Infrastructure.Jwt;
 using ParkingApp.Infrastructure.Services;
 
 namespace ParkingApp.Api.Controllers
@@ -26,7 +27,8 @@ namespace ParkingApp.Api.Controllers
             return Ok(list);
         }
 
-        [Authorize(Roles = "Admin")]
+        [HttpGet("ForAdmin")]
+        [AuthorizeToken(Roles = "Admin")]
         public async Task<ActionResult> AddParkingLot()
         {
             return new ObjectResult(new
