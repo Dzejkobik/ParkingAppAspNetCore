@@ -37,7 +37,7 @@ namespace ParkingApp.Infrastructure.Services
                 return serviceResult;
             }
             var user = Mapper.Map(userDto);
-            string defaultRole = "Admin";
+            string defaultRole = "Customer";
             user.Role = defaultRole;
             var userManagerResult = await _userManager.CreateAsync(user,userDto.Password);
             if (userManagerResult.Succeeded == false)
