@@ -9,6 +9,7 @@ namespace ParkingApp.Infrastructure.Repositories
 {
     public interface IParkingLotRepository
     {
-        IEnumerable<ParkingLot> GetAllParkingLots();
+        Task<IEnumerable<ParkingLot>> GetAllParkingLotsAsync();
+        Task AddParkingLotAsync(ParkingLot parkingLot);
     }
 }

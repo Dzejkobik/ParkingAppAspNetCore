@@ -16,9 +16,9 @@ namespace ParkingApp.Infrastructure.Mappers
             return user;
         }
 
-        public static ParkingLotDto Map(ParkingLot parkingLot)
+        public static ParkingLotDtoGet Map(ParkingLot parkingLot)
         {
-            var parkingLotDto = new ParkingLotDto()
+            var parkingLotDto = new ParkingLotDtoGet()
             {
                 FreeParkingSpots = parkingLot.FreeParkingSpots,
                 Location = parkingLot.Location,

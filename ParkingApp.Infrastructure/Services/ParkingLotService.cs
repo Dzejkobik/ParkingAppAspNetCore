@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ParkingApp.Core.Domain;
 using ParkingApp.Infrastructure.DTO;
 using ParkingApp.Infrastructure.Mappers;
 using ParkingApp.Infrastructure.Repositories;
+using ParkingApp.Infrastructure.ServicesResults;
 
 namespace ParkingApp.Infrastructure.Services
 {
@@ -17,17 +19,25 @@ namespace ParkingApp.Infrastructure.Services
             _parkingLotRepository = parkingLotRepository;
         }
 
-        public List<ParkingLotDto> GetAllParkingLots()
+        public async Task<ServiceResult<List<ParkingLotDtoGet>>> GetAllParkingLotsAsync()
         {
-            var list = _parkingLotRepository.GetAllParkingLots();
-            var listOfDtos = new List<ParkingLotDto>();
+            var result = new ServiceResult<List<ParkingLotDtoGet>>();
+            var list = await _parkingLotRepository.GetAllParkingLotsAsync();
+            var listOfDtos = new List<ParkingLotDtoGet>();
             foreach (var parkingLot in list)
             {
                 var parkingLotDto = Mapper.Map(parkingLot);
                 listOfDtos.Add(parkingLotDto);
             }
 
-            return listOfDtos;
+            result.IsSuccessful = true;
+            result.Object = listOfDtos;
+            return result;
+        }
+
+        public async Task<ServiceResult> AddParkingLot(ParkingLotDtoGet parkingLotDto)
+        {
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ParkingApp.Core.Domain;
 using ParkingApp.Infrastructure.Database;
 
@@ -15,9 +16,15 @@ namespace ParkingApp.Infrastructure.Repositories
         {
             _applicationDbContext = applicationDbContext;
         }
-        public IEnumerable<ParkingLot> GetAllParkingLots()
+
+        public async Task<IEnumerable<ParkingLot>> GetAllParkingLotsAsync()
         {
-            return _applicationDbContext.ParkingLots;
+            return await _applicationDbContext.ParkingLots.ToListAsync();
+        }
+
+        public async Task AddParkingLotAsync(ParkingLot parkingLot)
+        {
+            await _applicationDbContext.ParkingLots.AddAsync(parkingLot);
         }
     }
 }
